@@ -1,0 +1,41 @@
+{
+  "name": "Imaginatrix",
+  "version": "0.0.1",
+  "description": "React components for a mind machine with google cardboard",
+  "homepage": "https://github.com/michaelsharpe/imaginatrix",
+  "author": {
+    "name": "Michael Sharpe",
+    "email": "m.sharpe@project89.org"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest --watch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.2.2",
+    "jshint": "2.9.5",
+    "parcel-bundler": "^1.5.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./test/setupTests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelsharpe/imaginatrix"
+  },
+  "main": "index.html",
+  "dependencies": {
+    "global": "^4.3.2",
+    "jest-cli": "^22.2.2",
+    "note-parser": "^2.0.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
