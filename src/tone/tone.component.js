@@ -15,8 +15,6 @@ export default class Tone extends Component {
   constructor(props, context) {
     super(props)
 
-    console.log(context)
-
     const { audioContext } = context
     const { frequency, type, hertz } = this.props
 

@@ -26,7 +26,6 @@ export default class AudioContextProvider extends Component {
   }
 
   getChildContext() {
-    console.log(this.audioContext)
     return { audioContext: this.props.audioContext || this.audioContext }
   }
 
