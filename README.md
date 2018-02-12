@@ -1,12 +1,12 @@
 mind-machine
 ============
-A mind-machine built for [Google Cardboard][].
+React components for building mind-machines for web and [Google Cardboard][].  Still under active development.  Inspired from the code found at https://github.com/chrisallenlane/mind-machine.
 
-**WARNING: This application may potentially trigger seizures in people with
-photosensitive epilepsy.**
+**WARNING: This application may potentially trigger seizures in people with photosensitive epilepsy.**
 
 About
 -----
+
 [Wikipedia][mind-machines]:
 
 > A mind machine (aka brain machine or light and sound machine) uses pulsing
@@ -17,32 +17,15 @@ About
 > obtained from meditation and shamanic exploration. Photic mind machines work
 > with flickering lights embedded in sunglasses.
 
-This app was inspired by [an article from _Make Magazine_][make].
+More information on building mind machines can be found in [this article from _Make Magazine_][make].
 
 
 Usage
 -----
-The app is hosted here:  
-https://mind-machine.chris-allen-lane.com
+1. Run either `npm install` or `yarn install` to install dependencies.  If you don't have node, install guides can be found via google for your platform.
 
-1. Visit the app on a mobile device.
-2. Tap the screen to enter "fullscreen" mode and begin a session.
-3. Insert the mobile device into a Google Cardboard (or equivalent) headset.
-4. Assume a comfortable, meditative posture.
+2. Run `yarn start` or `npm start`.  This will spin up the server via parcel, build and bundle your code, and serve it.
 
-A session will last approximately 23 minutes.
-
-
-Tips
-----
-1. For best results, use this application in a dark, quiet room. The fewer
-   outside distractions you perceive, the better.
-2. Close your eyes. You'll be able to see the light pulses through closed
-   eyelids. You may even want to turn your screen brightness down, because a
-   bright screen will become uncomfortable once your eyes have become
-   dark-adapted.
-3. Use headphones.
-4. Configure your device to screen-sleep no earlier than 30 minutes.
 
 
 Safety
