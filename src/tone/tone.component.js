@@ -5,7 +5,9 @@ export default class Tone extends Component {
   static defaultProps = {
     frequency: 200,
     type: 'sine',
-    hertz: 15
+    hertz: 15,
+    start: true,
+    intervalTime: 60
   }
 
   static contextTypes = {
@@ -14,22 +16,31 @@ export default class Tone extends Component {
 
   constructor(props, context) {
     super(props)
+    const { frequency, type, hertz, intervalTime } = this.props
 
-    const { audioContext } = context
-    const { frequency, type, hertz } = this.props
+    this.state = {
+      frequency,
+      type,
+      hertz
+    }
 
     // Grab audioContext from provider
-    this.audioContext = audioContext
-
+    this.audioContext = context.audioContext
     // Initialize left tone
-    this.left = audioContext.createOscillator()
+    this.left = this.audioContext.createOscillator()
     this.left.type = type
-    this.left.frequency.value = frequency
-
-    // Initialize right tone with hertz difference
-    this.right = audioContext.createOscillator()
+    this.right = this.audioContext.createOscillator()
     this.right.type = type
-    this.right.frequency.value = frequency + hertz
+
+    this.setFrequency({ frequency, hertz, intervalTime })
+  }
+
+  setFrequency({ frequency, hertz, intervalTime }) {
+    const { left, right, audioContext } = this
+    console.log(left)
+
+    left.frequency.linearRampToValueAtTime(frequency, audioContext.currentTime + intervalTime)
+    right.frequency.linearRampToValueAtTime(frequency, audioContext.currentTime + intervalTime)
   }
 
   componentDidMount() {
@@ -43,6 +54,11 @@ export default class Tone extends Component {
 
     left.start()
     right.start()
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log(nextProps)
+    this.setFrequency(nextProps)
   }
 
   render() {

@@ -2,55 +2,57 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export default class Frequency extends Component {
+  static defaultProps = {
+    frequency: 200,
+    startHertz: 15,
+    endHertz: 2,
+    step: 1,
+    intervalTime: 1
+  }
+
   constructor(props) {
     super(props);
-    // Time at each frequency
-    // this.intervalTime = 3 * 60 * 1000
-    this.intervalTime = 3000
+    const { frequency, startHertz, endHertz, step, intervalTime } = this.props
+
+    this.intervalTime = intervalTime
     this.interval = null
 
     this.state = {
-      frequency: 200,
-      hertz: 15,
-      step: 2
+      frequency,
+      endHertz,
+      currentHertz: startHertz,
+      step,
     }
   }
 
   step() {
-    const { hertz, step, frequency } = this.state
+    const { currentHertz, endHertz, step, frequency } = this.state
 
-    // assert that we reach 0.5hz regardless of the step value
-    console.log("hertz: ", hertz, " Step: ", step)
-    if (hertz <= step) {
-      this.setState({
-        ...this.state,
-        step: 0.5
-      })
-
-      // Lowest state is 0.5
-      clearInterval(this.interval)
+    // Stop when our current hertz reaches the desired end hertz
+    if (currentHertz <= endHertz) {
+      window.clearInterval(this.interval)
     }
 
-    const nextHertz = hertz - step
+    const nextHertz = currentHertz - step
     const nextFrequency = frequency - nextHertz
-
-    console.log("next frequency", nextHertz, nextFrequency)
 
     this.setState({
       ...this.state,
-      hertz: nextHertz,
+      currentHertz: nextHertz,
       frequency: nextFrequency
     })
   }
 
   componentDidMount() {
-    this.interval = window.setInterval(this.step.bind(this), this.intervalTime)
+    console.log("interval time", this.intervalTime)
+    this.interval = window.setInterval(this.step.bind(this), (this.intervalTime * 1000))
   }
 
   render() {
+    console.log("calling render in frequency")
     return (
       <div>
-        {this.props.children(this.state.frequency, this.state.hertz)}
+        {this.props.children(this.state.frequency, this.state.currentHertz, this.intervalTime)}
       </div>
     )
   }
