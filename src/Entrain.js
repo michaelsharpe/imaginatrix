@@ -5,7 +5,7 @@ import Frequency from './Frequency'
 import Tone from './Tone'
 import Strobe from './Strobe'
 
-export default class App extends Component {
+export default class Entrain extends Component {
   render() {
       return (
         <AudioContextProvider>

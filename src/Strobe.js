@@ -36,7 +36,7 @@ export default class Strobe extends Component {
   render() {
     const sharedStyle = {
       flex: 1,
-      height: '100vh'
+      height: '100vh',
     }
 
     const containerStyle = {
@@ -55,19 +55,18 @@ export default class Strobe extends Component {
       backgroundColor: this.props.flashColor,
     }
 
+    const { alternate, displayFlash } = this.state
+
 //this.state.displayFlash
     return (
       <div style={containerStyle}>
         <div style={backgroundStyle}>
-           { this.state.displayFlash && <div style={flashStyle}></div>}
+          { displayFlash && <div style={flashStyle}></div>}
         </div>
 
-        { /* If we want the twop eyes to flicker at alternate intervals, create a second flasher */}
-        { this.props.alternate &&
-          <div style={flashStyle}>
-          { this.state.displayFlash && <div style={backgroundStyle}></div> }
-          </div>
-        }
+        <div style={ alternate ? flashStyle : backgroundStyle }>
+          { displayFlash && <div style={alternate ? backgroundStyle : flashStyle }></div> }
+        </div>
 
         <ReactInterval
           timeout={ 1000 / this.props.hertz }

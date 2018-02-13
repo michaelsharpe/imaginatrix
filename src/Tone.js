@@ -40,17 +40,26 @@ export default class Tone extends Component {
   setFrequency({ frequency, hertz, intervalTime }) {
     const { left, right, audioContext } = this
 
+    if(!this.state.running) {
+      left.frequency.value = frequency
+      right.frequency.value = frequency - hertz
+    }
+
     left.frequency.linearRampToValueAtTime(frequency, audioContext.currentTime + intervalTime)
-    right.frequency.linearRampToValueAtTime(frequency, audioContext.currentTime + intervalTime)
+    right.frequency.linearRampToValueAtTime(frequency - hertz, audioContext.currentTime + intervalTime)
   }
 
   start() {
+    this.setFrequency(this.state)
+
     if (!this.state.running ) {
       this.setState({
         ...this.state,
         running: true
       })
     }
+
+    alert(this.state.frequency)
 
     this.left.start()
     this.right.start()
@@ -71,9 +80,21 @@ export default class Tone extends Component {
   }
 
   render() {
+    const buttonStyle = {
+      width: '100%',
+      height: '50px',
+      borderRadius: 5,
+      fontSize: 26
+    }
+
     return (
       <div>
-        { !this.state.running && <button onClick={this.start.bind(this)}>Start!</button> }
+        { !this.state.running &&
+          <button
+            style={buttonStyle}
+            onTouch={this.start.bind(this)}
+            onClick={this.start.bind(this)}
+          >Start!</button> }
         {this.props.children}
       </div>)
   }
