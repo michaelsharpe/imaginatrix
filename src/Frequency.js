@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ReactInterval from 'react-interval'
 
 export default class Frequency extends Component {
   static defaultProps = {
@@ -44,12 +45,10 @@ export default class Frequency extends Component {
   }
 
   componentDidMount() {
-    console.log("interval time", this.intervalTime)
     this.interval = window.setInterval(this.step.bind(this), (this.intervalTime * 1000))
   }
 
   render() {
-    console.log("calling render in frequency")
     return (
       <div>
         {this.props.children(this.state.frequency, this.state.currentHertz, this.intervalTime)}

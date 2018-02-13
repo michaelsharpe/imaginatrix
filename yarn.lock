@@ -4280,6 +4280,12 @@ react-dom@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-interval@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-interval/-/react-interval-2.0.2.tgz#eb52690c79fde7125beaab6258e4d630d3f1f2ce"
+  dependencies:
+    prop-types "^15.6.0"
+
 react-reconciler@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.7.0.tgz#9614894103e5f138deeeb5eabaf3ee80eb1d026d"

@@ -6,7 +6,6 @@ export default class Tone extends Component {
     frequency: 200,
     type: 'sine',
     hertz: 15,
-    start: true,
     intervalTime: 60
   }
 
@@ -29,6 +28,7 @@ export default class Tone extends Component {
     // Initialize left tone
     this.left = this.audioContext.createOscillator()
     this.left.type = type
+
     this.right = this.audioContext.createOscillator()
     this.right.type = type
 
@@ -37,7 +37,6 @@ export default class Tone extends Component {
 
   setFrequency({ frequency, hertz, intervalTime }) {
     const { left, right, audioContext } = this
-    console.log(left)
 
     left.frequency.linearRampToValueAtTime(frequency, audioContext.currentTime + intervalTime)
     right.frequency.linearRampToValueAtTime(frequency, audioContext.currentTime + intervalTime)
