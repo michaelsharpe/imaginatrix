@@ -1,15 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import ReactInterval from 'react-interval'
+import Chroma from 'chroma-js'
 
 // Strobe component is made is flash a div at a determined frequency between two
-// supplied colors, or set to complimentary colors
+// supplied colors, or set to complementary colors
 export default class Strobe extends Component {
   static defaultProps = {
     hertz: 15,
-    complimentary: false,
+    complementary: false,
     backgroundColor: '#000000',
-    flashColor: '#ffffff',
+    color: '#ffffff',
     start: true,
     alternate: false
   }
@@ -17,8 +18,8 @@ export default class Strobe extends Component {
   static propTypes = {
     hertz: PropTypes.number,
     backgroundColor: PropTypes.string,
-    complimentary: PropTypes.bool,
-    flashColor: PropTypes.string,
+    complementary: PropTypes.bool,
+    color: PropTypes.string,
     intervalTime: PropTypes.number,
     start: PropTypes.bool,
     alternate: PropTypes.bool
@@ -26,14 +27,24 @@ export default class Strobe extends Component {
 
   constructor(props) {
     super(props)
-
     this.interval = null
+
     this.state = {
       displayFlash: false
     }
   }
 
+  getComplementaryColor(color) {
+    const [hue, saturation, lightness] = Chroma(color).hsv()
+    return Chroma.hsv(hue + 180, saturation, lightness)
+  }
+
   render() {
+    const { alternate, displayFlash } = this.state
+    const { complementary, backgroundColor, color } = this.props
+
+    console.log()
+
     const sharedStyle = {
       flex: 1,
       height: '100vh',
@@ -47,17 +58,14 @@ export default class Strobe extends Component {
 
     const backgroundStyle = {
       ...sharedStyle,
-      backgroundColor: this.props.backgroundColor,
+      backgroundColor: complementary ? this.getComplementaryColor(color) : backgroundColor,
     }
 
     const flashStyle = {
       ...sharedStyle,
-      backgroundColor: this.props.flashColor,
+      backgroundColor: this.props.color,
     }
 
-    const { alternate, displayFlash } = this.state
-
-//this.state.displayFlash
     return (
       <div style={containerStyle}>
         <div style={backgroundStyle}>
