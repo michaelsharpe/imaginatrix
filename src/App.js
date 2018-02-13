@@ -9,7 +9,7 @@ export default class App extends Component {
   render() {
       return (
         <AudioContextProvider>
-          <Frequency frequency={200} startHertz={15} endHertz={5} step={1} intervalTime={60}>
+          <Frequency frequency={400} startHertz={15} endHertz={5} step={1} intervalTime={60}>
             { (frequency, hertz, interval) => (
                 <Tone frequency={frequency} hertz={hertz} intervalTime={interval}>
                   <Strobe hertz={hertz} />

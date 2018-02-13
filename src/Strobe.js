@@ -11,7 +11,7 @@ export default class Strobe extends Component {
     backgroundColor: '#000000',
     flashColor: '#ffffff',
     start: true,
-    alternate: true
+    alternate: false
   }
 
   static propTypes = {

@@ -6,7 +6,8 @@ export default class Tone extends Component {
     frequency: 200,
     type: 'sine',
     hertz: 15,
-    intervalTime: 60
+    intervalTime: 60,
+    running: false
   }
 
   static contextTypes = {
@@ -25,6 +26,7 @@ export default class Tone extends Component {
 
     // Grab audioContext from provider
     this.audioContext = context.audioContext
+    window.audioContext = context.audioContext
     // Initialize left tone
     this.left = this.audioContext.createOscillator()
     this.left.type = type
@@ -42,6 +44,18 @@ export default class Tone extends Component {
     right.frequency.linearRampToValueAtTime(frequency, audioContext.currentTime + intervalTime)
   }
 
+  start() {
+    if (!this.state.running ) {
+      this.setState({
+        ...this.state,
+        running: true
+      })
+    }
+
+    this.left.start()
+    this.right.start()
+  }
+
   componentDidMount() {
     const { audioContext, right, left } = this
     const merger = audioContext.createChannelMerger()
@@ -50,17 +64,17 @@ export default class Tone extends Component {
     right.connect(merger, 0, 1)
 
     merger.connect(audioContext.destination)
-
-    left.start()
-    right.start()
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log(nextProps)
     this.setFrequency(nextProps)
   }
 
   render() {
-    return (<div>{this.props.children}</div>)
+    return (
+      <div>
+        { !this.state.running && <button onClick={this.start.bind(this)}>Start!</button> }
+        {this.props.children}
+      </div>)
   }
 }
