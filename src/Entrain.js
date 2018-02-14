@@ -6,10 +6,12 @@ import BinauralBeat from './BinauralBeat'
 import Strobe from './Strobe'
 
 export default class Entrain extends Component {
+
   render() {
       return (
         <AudioContextProvider>
           <Frequency
+            note="C3"
             startHertz={15}
             endHertz={5}
             step={1}
@@ -17,7 +19,7 @@ export default class Entrain extends Component {
           >
             { (frequency, hertz, interval) => (
                 <BinauralBeat frequency={frequency} hertz={hertz} intervalTime={interval}>
-                  <Strobe hertz={hertz} color="#5c4aff" complementary={true}/>
+                  <Strobe hertz={hertz} color="#0500ff" complementary={true} alternate={true}/>
                 </BinauralBeat>
               )
             }
