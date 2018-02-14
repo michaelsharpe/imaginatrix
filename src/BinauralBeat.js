@@ -50,16 +50,12 @@ export default class Tone extends Component {
   }
 
   start() {
-    this.setFrequency(this.state)
-
     if (!this.state.running ) {
       this.setState({
         ...this.state,
         running: true
       })
     }
-
-    alert(this.state.frequency)
 
     this.left.start()
     this.right.start()
